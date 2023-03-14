@@ -1,0 +1,11 @@
+{% extends 'base/main.html' %}
+{% block content %}
+
+<button><a href="{% url 'jobs'%}">Back</a></button>
+
+<form method="post">
+    {% csrf_token %}
+    <p>Are you sure you want to delete "{{ job }}"?</p>
+    <input type="submit" value="Delete">
+</form>
+{% endblock content %}

@@ -1,0 +1,13 @@
+{% extends 'base/main.html' %}
+{% block content %}
+
+<h3>Job application:</h3>
+<button><a href="{% url 'jobs' %}">Back</a></button>
+
+
+<form method="POST" action="">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Add">
+</form>
+{% endblock content %}

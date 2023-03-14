@@ -1,0 +1,51 @@
+{% extends 'base/main.html' %}
+{% block content %}
+
+{% if request.user.is_authenticated %}
+<p>{{request.user}} , <a href="{% url 'logout' %}">Logout</a></p>
+{% else %}
+<p><a href="{% url 'login' %}">Login</a></p>
+{% endif %}
+
+
+
+
+<h1>Job Applications:</h1>
+<button><a href="{% url 'job-create' %}">Add Job application</a></button>
+
+
+<form action="" method="get">
+    <input type="text" name="search-area" value="{{ search_input }}">
+    <input type="submit" value="Search">
+</form>
+
+<div>
+    <div>
+        <h3>You've applied for {{ count }} job{{ count|pluralize:"s" }}.</h3>
+    </div>
+</div>
+
+<table>
+    <tr>
+        <th>Job Title</th>
+        <th>Company</th>
+        <th>Date Applied</th>
+        <th>Stage</th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    {% for job in jobs %}
+    <tr>
+        <td>{{job.job_title}}</td>
+        <td>{{job.company}}</td>
+        <td>{{job.date_applied}}</td>
+        <td>{{job.get_stage_display}}</td>
+        <td><a href="{% url 'job' job.id %}">view</a></td>
+        <td><a href="{% url 'job-update' job.id %}">edit</a></td>
+        <td><a href="{% url 'job-delete' job.id %}">delete</a></td>
+    </tr>
+    {% endfor %}
+
+</table>
+{% endblock content %}
